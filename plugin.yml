@@ -1,0 +1,28 @@
+name: CakesMinerApocalypse
+main: me.cakenggt.CakesMinerApocalypse.CakesMinerApocalypse
+version: 2.8
+author: [cakenggt, DreTaX]
+permissions:
+  cakesminerapocalypse.radio:
+      description: gives access to radio
+      default: true
+  cakesminerapocalypse.support:
+      description: gives access to support
+      default: true
+  cakesminerapocalypse.generatevault:
+      description: gives access to generatevault
+      default: op
+commands:
+  radio:
+    description: This command sets your radio frequency.
+    permission: cakesminerapocalypse.radio
+    usage: Example usage /radio 1335
+  support:
+    description: This command lets you talk to ops.
+    permission: cakesminerapocalypse.support
+    usage: Example usage /support please help me
+  placeshelter:
+    description: This command lets you place fallout shelters.
+    permission: cakesminerapocalypse.placeshelter
+    usage: Example usage /placeshelter 1 2 3 or /placeshelter here
+    aliases: genvault

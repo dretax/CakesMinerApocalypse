@@ -15,7 +15,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
@@ -123,7 +123,7 @@ public class CakesMinerApocalypsePlayerLogin implements Listener {
 		//event.getPlayer().teleport(teleLoc);	
 	}
 	@EventHandler(priority = EventPriority.HIGHEST)
-	public void onPlayerChat(PlayerChatEvent event){
+	public void onPlayerChat(AsyncPlayerChatEvent event){
 		double chatDistance = (double)this.p.getChatDistance();
 		if (chatDistance == -5)
 			return;

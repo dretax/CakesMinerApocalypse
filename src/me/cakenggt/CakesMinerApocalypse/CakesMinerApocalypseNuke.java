@@ -70,7 +70,7 @@ public class CakesMinerApocalypseNuke implements Listener {
 		}
 		if (amount == 0)
 			return;
-		int stacks = (int)(amount/64);
+		int stacks = amount/64;
 		int leftOver = amount%64;
 		event.getLocation().getWorld().createExplosion(event.getLocation(), 32F * stacks);
 		for (int i = 0; i < stacks; i++){

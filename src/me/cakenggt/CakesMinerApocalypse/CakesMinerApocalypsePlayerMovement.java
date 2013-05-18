@@ -217,8 +217,7 @@ public class CakesMinerApocalypsePlayerMovement implements Listener {
 							|| poss.getType() == Material.CHAINMAIL_CHESTPLATE
 							|| poss.getType() == Material.CHAINMAIL_HELMET
 							|| poss.getType() == Material.CHAINMAIL_LEGGINGS) {
-						poss.setDurability((short) ((short) poss
-								.getDurability() - 2));
+						poss.setDurability((short) (poss.getDurability() - 2));
 					}
 				}
 			}
@@ -229,15 +228,15 @@ public class CakesMinerApocalypsePlayerMovement implements Listener {
 				player.damage(1);
 			}
 			else
-				armor[whichArmor].setDurability((short) ((short) armor[whichArmor].getDurability() + 2));
+				armor[whichArmor].setDurability((short) (armor[whichArmor].getDurability() + 2));
 			if (armor[whichArmor].getType() == Material.CHAINMAIL_HELMET)
-				armor[whichArmor].setDurability((short) ((short) armor[whichArmor].getDurability() + 2));
+				armor[whichArmor].setDurability((short) (armor[whichArmor].getDurability() + 2));
 			else if (armor[whichArmor].getType() == Material.CHAINMAIL_CHESTPLATE)
-				armor[whichArmor].setDurability((short) ((short) armor[whichArmor].getDurability() + 2));
+				armor[whichArmor].setDurability((short) (armor[whichArmor].getDurability() + 2));
 			else if (armor[whichArmor].getType() == Material.CHAINMAIL_BOOTS)
-				armor[whichArmor].setDurability((short) ((short) armor[whichArmor].getDurability() + 2));
+				armor[whichArmor].setDurability((short) (armor[whichArmor].getDurability() + 2));
 			else if (armor[whichArmor].getType() == Material.CHAINMAIL_LEGGINGS)
-				armor[whichArmor].setDurability((short) ((short) armor[whichArmor].getDurability() + 2));
+				armor[whichArmor].setDurability((short) (armor[whichArmor].getDurability() + 2));
 			if (armor[whichArmor].getType() == Material.LEATHER_HELMET && armor[whichArmor].getDurability() > 56)
 				armor[whichArmor].setAmount(0);
 			else if (armor[whichArmor].getType() == Material.LEATHER_CHESTPLATE && armor[whichArmor].getDurability() > 81)
@@ -445,10 +444,10 @@ public class CakesMinerApocalypsePlayerMovement implements Listener {
 				playerLoc.setWorld(altWorld);
 				player.teleport(playerLoc);
 			}
-			player.getInventory().getHelmet().setDurability((short) ((short) player.getInventory().getHelmet().getDurability() + 80));
-			player.getInventory().getChestplate().setDurability((short) ((short) player.getInventory().getChestplate().getDurability() + 115));
-			player.getInventory().getLeggings().setDurability((short) ((short) player.getInventory().getLeggings().getDurability() + 110));
-			player.getInventory().getBoots().setDurability((short) ((short) player.getInventory().getBoots().getDurability() + 100));
+			player.getInventory().getHelmet().setDurability((short) (player.getInventory().getHelmet().getDurability() + 80));
+			player.getInventory().getChestplate().setDurability((short) (player.getInventory().getChestplate().getDurability() + 115));
+			player.getInventory().getLeggings().setDurability((short) (player.getInventory().getLeggings().getDurability() + 110));
+			player.getInventory().getBoots().setDurability((short) (player.getInventory().getBoots().getDurability() + 100));
 		}
 	}
 }

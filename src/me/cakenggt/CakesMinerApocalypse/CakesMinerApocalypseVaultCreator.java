@@ -23,7 +23,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.craftbukkit.v1_5_R1.block.CraftBlock;
 
 
 

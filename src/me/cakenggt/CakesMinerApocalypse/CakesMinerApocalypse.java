@@ -697,7 +697,7 @@ public class CakesMinerApocalypse extends JavaPlugin {
 	   		}
     		if (args[0].equalsIgnoreCase("scan")){
     			try {
-					setFrequency(sender, args[0].toString());
+					setFrequency(sender, args[0]);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -709,13 +709,13 @@ public class CakesMinerApocalypse extends JavaPlugin {
     			return true;
     		}
     		try {
-				Double.parseDouble(args[0].toString());
+				Double.parseDouble(args[0]);
 		    }
 			catch (NumberFormatException e) {
 				sender.sendMessage(cmd.getUsage());
 				return true;
 		    }
-	   		String inputString = args[0].toString();
+	   		String inputString = args[0];
 	   		try {
 	   			setFrequency(sender, inputString);
     		} catch (IOException e) {
@@ -730,11 +730,11 @@ public class CakesMinerApocalypse extends JavaPlugin {
 	   		}
 	   		System.out.println("[Support Chat] " + sender.getName() + ":" + message);
 	   		Player[] recipientsArray = sender.getServer().getOnlinePlayers();
-			for (int i = 0; i < recipientsArray.length; i ++){
-				if (recipientsArray[i].isOp()){
-					recipientsArray[i].sendMessage(ChatColor.BLUE + "[Support Chat] " + sender.getName() + ":" + message);
-				}
-			}
+            for (int i = 0; i < recipientsArray.length; i ++){
+                if (recipientsArray[i].isOp()){
+                    recipientsArray[i].sendMessage(ChatColor.BLUE + "[Support Chat] " + sender.getName() + ":" + message);
+                }
+            }
 	   		return true;
 	   	}
 

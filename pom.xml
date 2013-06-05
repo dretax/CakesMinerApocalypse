@@ -14,9 +14,9 @@
 
     <!-- Source code -->
     <scm>
-        <developerConnection>scm:git:git@bitbucket.org:divinelegion/saveit.git</developerConnection>
-        <connection>scm:git:git@bitbucket.org:divinelegion/saveit.git</connection>
-        <url>https://bitbucket.org/divinelegion/saveit</url>
+        <developerConnection>scm:git:git@github.com:dretax/CakesMinerApocalypse.git</developerConnection>
+        <connection>scm:git:git@github.com:dretax/CakesMinerApocalypse.git</connection>
+        <url>https://github.com/dretax/CakesMinerApocalypse</url>
     </scm>
 
     <!-- Repository locations -->

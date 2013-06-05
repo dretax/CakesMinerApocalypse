@@ -5,13 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -54,6 +48,7 @@ public class CakesMinerApocalypse extends JavaPlugin {
 	private int pipboyID = 345;
 	private int chatDistance = 50;
 	private final String configname = "config.yml";
+    protected List<String> EWorlds = Arrays.asList(new String[] { "world", "world_nether", "world_the_end"});
     
     public void onDisable() {
         // TODO: Place any custom disable code here.
@@ -111,6 +106,7 @@ public class CakesMinerApocalypse extends JavaPlugin {
         getServer().addRecipe(bRecipe);
         getServer().addRecipe(cRecipe);
         getServer().addRecipe(dRecipe);
+
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, this.broadcast, 20L, 100L);
 
         if (getConfig().getBoolean("alternateWorlds", true)) {
@@ -164,6 +160,7 @@ public class CakesMinerApocalypse extends JavaPlugin {
         config.set("alternateWorldsTemporalMesh", true);
         config.set("alternateWorldsPotionEffects", true);
         config.set("alternateWorldsPortalDevice", true);
+        config.set("AlternateWorldNames", EWorlds);
 		config.set("shelter.lightBlock", "glowstone");
 		//Note to self, these were disabled (3)
 		//config.set("shelter.lightBlock", "128;1");     // PlasticCraft GlowingPlexiglass
@@ -834,20 +831,23 @@ public class CakesMinerApocalypse extends JavaPlugin {
 	   public void alternateWorlds (){
 		   List<World> worlds = getServer().getWorlds();
 		   for (World world : worlds){
+               String worldname = world.getName();
 			   if (this.worldsTable.get(world)){
-				   if (getServer().getWorld(world.getName() + "Alternate") == null){
-					   WorldCreator creator = new WorldCreator(world.getName() + "Alternate");
-					   World worldd = WorldCreator(world.getName() + "Alternate", creator.createWorld());
+                   if (EWorlds.contains(worldname)) {
+				   if (getServer().getWorld(worldname + "Alternate") == null){
+					   WorldCreator creator = new WorldCreator(worldname + "Alternate");
+					   World worldd = WorldCreator(worldname + "Alternate", creator.createWorld());
 					   creator.copy(world);
 					   worldd();
-					   this.setOn(getServer().getWorld(world.getName() + "Alternate"), true);
+					   this.setOn(getServer().getWorld(worldname + "Alternate"), true);
 				   }
 				   else{
-					   this.setOn(getServer().getWorld(world.getName() + "Alternate"), true);
+					   this.setOn(getServer().getWorld(worldname + "Alternate"), true);
 				   }
 			   }
 		   }
 	   }
+    }
 
 	private void worldd() {
 		// TODO Auto-generated method stub

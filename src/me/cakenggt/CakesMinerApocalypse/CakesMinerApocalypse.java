@@ -48,7 +48,7 @@ public class CakesMinerApocalypse extends JavaPlugin {
 	private int pipboyID = 345;
 	private int chatDistance = 50;
 	private final String configname = "config.yml";
-    protected List<String> EWorlds = Arrays.asList(new String[] { "world", "world_nether", "world_the_end"});
+    protected List<String> EWorlds = Arrays.asList(new String[] { "nyancat", "awesomeplugin"});
     
     public void onDisable() {
         // TODO: Place any custom disable code here.
@@ -67,6 +67,8 @@ public class CakesMinerApocalypse extends JavaPlugin {
     	chunkListener = new CakesMinerApocalypseVaultCreator(this);
     	nukeListener = new CakesMinerApocalypseNuke(this);
     	try {
+            checkCraters();
+            checkcraterTimes();
 			loadCraters();
 			loadGECKs();
 			loadCraterTimes();
@@ -484,6 +486,7 @@ public class CakesMinerApocalypse extends JavaPlugin {
 	    this.setCraterChance(config.getDouble("craterChance", this.getCraterChance()));
 	    this.setPipboyID(config.getInt("pipboyID", this.getPipboyID()));
 	    this.setChatDistance(config.getInt("chatDistance", this.getChatDistance()));
+        EWorlds = getConfig().getStringList("AlternateWorldNames");
 	    return true;
 	  }
 
@@ -517,6 +520,27 @@ public class CakesMinerApocalypse extends JavaPlugin {
 		}
 		outputFile.close();
 	}
+
+    public void checkCraters() throws IOException {
+        if (new File("plugins/CakesMinerApocalypse/").mkdirs())
+            System.out.println("CRATERS file created");
+        File myFile = new File("plugins/CakesMinerApocalypse/craters.txt");
+        if (!myFile.exists()){
+            PrintWriter outputFile = new PrintWriter("plugins/CakesMinerApocalypse/craters.txt");
+            System.out.println("CRATERS file created");
+            outputFile.close();
+        }
+    }
+    public void checkcraterTimes() throws IOException {
+        if (new File("plugins/CakesMinerApocalypse/").mkdirs())
+            System.out.println("CRATERS file created");
+        File myFile = new File("plugins/CakesMinerApocalypse/craterTimes.txt");
+        if (!myFile.exists()){
+            PrintWriter outputFile = new PrintWriter("plugins/CakesMinerApocalypse/craterTimes.txt");
+            System.out.println("CRATERS file created");
+            outputFile.close();
+        }
+    }
 	
 	public void checkRadios() throws IOException {
 		if (new File("plugins/CakesMinerApocalypse/").mkdirs())
@@ -616,14 +640,15 @@ public class CakesMinerApocalypse extends JavaPlugin {
 	public void loadCraters() throws IOException {
 		File myFile = new File("plugins/CakesMinerApocalypse/craters.txt");
 		Scanner inputFile = new Scanner(myFile);
-		List<Location> craters = new ArrayList<Location>();
+        List<Location> craters = new ArrayList<Location>();
 		while (inputFile.hasNextLine()){
 			Location a = new Location(Bukkit.getServer().getWorld(inputFile.next()), Double.valueOf(inputFile.next()), Double.valueOf(inputFile.next()), Double.valueOf(inputFile.next()));
 			craters.add(a);
 			inputFile.nextLine();
-		}
-		inputFile.close();
-		this.craters = craters;
+        }
+        inputFile.close();
+        this.craters = craters;
+
 	}
 	public List<Location> getCraters() {
 		return craters;
@@ -779,9 +804,10 @@ public class CakesMinerApocalypse extends JavaPlugin {
 	    	return false;
 	}
 	    
-	   public void setFrequency (CommandSender sender, String inputString) throws IOException{
-		   if (new File("plugins/CakesMinerApocalypse/").mkdirs())
+	public void setFrequency (CommandSender sender, String inputString) throws IOException{
+		   if (new File("plugins/CakesMinerApocalypse/").mkdirs())  {
 				System.out.println("Frequencies file created");
+           }
 		   File myFile = new File("plugins/CakesMinerApocalypse/frequencies.txt");
 		   if (myFile.exists()){
 			   Scanner inputFileCheck = new Scanner(myFile);
@@ -808,7 +834,7 @@ public class CakesMinerApocalypse extends JavaPlugin {
 	               }
 	           }
 	           inputFile.close();
-	           PrintWriter outputFile = new PrintWriter("plugins/CakesMinerApocalypse/frequencies.txt");
+               PrintWriter outputFile = new PrintWriter("plugins/CakesMinerApocalypse/frequencies.txt");
 	           for (int i = 0; i < size; i++) {
 	               outputFile.println(nameArray[i]);
 	               outputFile.println(circleArray[i]);
@@ -818,44 +844,33 @@ public class CakesMinerApocalypse extends JavaPlugin {
 	               outputFile.println(inputString);
 	           }
 	           outputFile.close();
-		}
-		else{
-			PrintWriter outputFile = new PrintWriter("plugins/CakesMinerApocalypse/frequencies.txt");
-	        outputFile.println(sender.getName());
-	        outputFile.println(inputString);
-	        sender.sendMessage("frequency " + inputString + " set successfully!");
-	        outputFile.close();
-		}
-    }
-	   
-	   public void alternateWorlds (){
-		   List<World> worlds = getServer().getWorlds();
-		   for (World world : worlds){
-               String worldname = world.getName();
-			   if (this.worldsTable.get(world)){
-                   if (EWorlds.contains(worldname)) {
-				   if (getServer().getWorld(worldname + "Alternate") == null){
-					   WorldCreator creator = new WorldCreator(worldname + "Alternate");
-					   World worldd = WorldCreator(worldname + "Alternate", creator.createWorld());
-					   creator.copy(world);
-					   worldd();
-					   this.setOn(getServer().getWorld(worldname + "Alternate"), true);
-				   }
-				   else{
-					   this.setOn(getServer().getWorld(worldname + "Alternate"), true);
-				   }
-			   }
 		   }
-	   }
+		   else{
+			    PrintWriter outputFile = new PrintWriter("plugins/CakesMinerApocalypse/frequencies.txt");
+	            outputFile.println(sender.getName());
+	            outputFile.println(inputString);
+	            sender.sendMessage("frequency " + inputString + " set successfully!");
+	            outputFile.close();
+		   }
     }
 
-	private void worldd() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private World WorldCreator(String string, World createWorld) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public void alternateWorlds() {
+        List<World> worlds = getServer().getWorlds();
+        for (World world : worlds){
+            //String worldname = world.getName();
+            if (this.worldsTable.get(world)){
+                for (String worldname : EWorlds) {
+                    if (getServer().getWorld(worldname) == null){
+                        WorldCreator creator = new WorldCreator(worldname);
+                        creator.copy(world);
+                        creator.createWorld();
+                        this.setOn(getServer().getWorld(worldname), true);
+                    }
+                    else{
+                        this.setOn(getServer().getWorld(worldname), true);
+                    }
+                }
+            }
+        }
+    }
 }
